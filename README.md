@@ -1,2 +1,2 @@
-# aaubakirov_test
-Test work of Almat Aubakirov
+# Refactoring of test code
+Author: Almat Aubakirov
