@@ -21,10 +21,10 @@ class DataProviderConfig
      */
     public function __construct($host, $port, $login, $password)
     {
-	   $this->host = $host;
-	   $this->port = $port;
-	   $this->login = $login;
-	   $this->password = $password;
+	$this->host = $host;
+	$this->port = $port;
+	$this->login = $login;
+	$this->password = $password;
     }
 
     /**
@@ -33,7 +33,7 @@ class DataProviderConfig
      */
     public function getHost()
     {
-	  return $this->host;
+	return $this->host;
     }
 
     /**
@@ -42,7 +42,7 @@ class DataProviderConfig
      */
     public function getPort()
     {
-	  return $this->port;
+	return $this->port;
     }
 
     /**
@@ -51,7 +51,7 @@ class DataProviderConfig
      */
     public function getLogin()
     {
-	  return $this->login;
+	return $this->login;
     }
 
     /**
@@ -60,7 +60,7 @@ class DataProviderConfig
      */
     public function getPassword()
     {
-	   return $this->password;
+	return $this->password;
     }
 
 }
