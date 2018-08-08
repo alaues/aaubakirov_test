@@ -1,9 +1,11 @@
 <?php
 
 namespace src\Integration;
+use src\Integration\DataProviderConfig;
 use src\Integration\DataProviderConnection;
-use Psr\Log\LoggerInterface;
+use Psr\Log\Logger;
 use DateTime;
+use Psr\Cache\CacheItemPool;
 
 class DataProvider
 {
@@ -11,14 +13,13 @@ class DataProvider
 
     /**
      * 
-     * @param DataProviderConnection $connection
-     * @param \src\Integration\CacheItemPoolInterface $cache
+     * @param \src\Integration\DataProviderConfig $config
      */
-    public function __construct(DataProviderConnection $connection, CacheItemPoolInterface $cache)
+    public function __construct(DataProviderConfig $config)
     {
-        $this->connection = $connection;
-        $this->cache = $cache;
-        $this->logger = new LoggerInterface();//why interface ?
+        $this->cache = new CacheItemPool();
+        $this->logger = new Logger();
+        $this->connection = new DataProviderConnection($config);
     }
     
     /**
@@ -27,13 +28,11 @@ class DataProvider
      */
     public function get(array $input) : array
     {
-
         try {
             $cacheKey = $this->getCacheKey($input);
             if ($cacheKey && !empty($result = $this->checkCache($cacheKey))){
                 return $result;
             }
-    
             $result = $this->connection->getCaseData($input);
 
             if ($cacheKey){
