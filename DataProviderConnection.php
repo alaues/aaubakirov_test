@@ -8,33 +8,20 @@ use src\Integration\DataProviderConfig;
  */
 class DataProviderConnection
 {
-    private static $instance; 
-    
-    /**
-     * instantiate class as Singleton
-     * @return class instance
-     */
-    static public function init()
-    {
-        if (self::$instance == null)
-        {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+    private static $pdo; 
 
     /**
      * 
-     * @return \PDO
+     * @param DataProviderConfig $config
      */
-    public function connect(DataProviderConfig $config)
+    public function __construct(DataProviderConfig $config)
     {
-        //f.e. mysql connection
         $host = $config->getHost();
         $port = $config->getPort();
         $login = $config->getLogin();
         $password = $config->getPassword();
-        return new \PDO('dblib:host='.$host.';dbname=dbname;charset=UTF-8', $login, $password);
+        //f.e. mysql
+        $this->pdo = new \PDO('dblib:host='.$host.';dbname=dbname;charset=UTF-8', $login, $password);
     }
 
     /**
@@ -43,8 +30,5 @@ class DataProviderConnection
     public function getCaseData()
     {
         //selects data	
-    }
-    
-    public function __construct(){}
-    public function __clone(){}
+    }   
 }
